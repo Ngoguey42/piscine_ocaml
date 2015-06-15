@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/15 10:00:36 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/15 14:02:34 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/15 14:58:48 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -19,10 +19,15 @@ let is_valid i =
   else
 	false
 
+let printwid3 i =
+  if i < 100 then
+	print_string "0";
+  print_int i
+
 let print i comma =
   if comma then
 	print_string ", ";
-  print_int i
+  printwid3 i
 
 let rec loop i comma =
   if i <= 789 then
