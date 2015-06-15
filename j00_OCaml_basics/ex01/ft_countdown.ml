@@ -1,28 +1,36 @@
 (* ************************************************************************** *)
 (*                                                                            *)
 (*                                                        :::      ::::::::   *)
-(*   ft_test_sign.ml                                    :+:      :+:    :+:   *)
+(*   ft_countdown.ml                                    :+:      :+:    :+:   *)
 (*                                                    +:+ +:+         +:+     *)
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
-(*   Created: 2015/06/15 09:04:29 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/15 09:35:05 by ngoguey          ###   ########.fr       *)
+(*   Created: 2015/06/15 09:19:27 by ngoguey           #+#    #+#             *)
+(*   Updated: 2015/06/15 09:35:24 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
-let ft_test_sign i =
-  if i < 0 then
-	print_endline "negative"
+let rec down i =
+  if i >= 0 then
+	begin
+	  print_int i;
+	  print_char '\n';
+	  down (i - 1)
+	end
+	  
+let rec ft_countdown i =
+  if i <= 0 then
+	down 0
   else
-	print_endline "positive"
+	down i
 
-let test_fun i =
-  Printf.printf "Test with [%+03d]: %!" i;
-  ft_test_sign i
-
+let test i =
+  Printf.printf "Test with [%d]:\n%!" i;
+  ft_countdown i			   
+			   
 let () =
-  test_fun (-42);
-  test_fun (-1);
-  test_fun 0;
-  test_fun 1;
-  test_fun 42
+  test 12;
+  test 1;
+  test 0;
+  test (-1);
+  test (-42)
