@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/15 12:03:19 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/15 12:24:42 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/15 13:14:55 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -30,7 +30,6 @@ let is_lower c =
 let is_upper c =
   c >= 'A' && c <= 'Z'
 
-					 
 let rot i c =
   if is_lower c then
 	char_of_int (looplower (int_of_char c + i))
@@ -38,16 +37,16 @@ let rot i c =
 	char_of_int (loopupper (int_of_char c + i))
   else
 	c
-	  
+
 let ft_rot_n i s =
   let rot c =
 	rot i c
   in
-  String.map (rot) s
+  String.map rot s
 
 let test i s =
   Printf.printf "Test rot%-3d \"%s\"=>\"%s\"  \n%!" i s (ft_rot_n i s)
-				
+
 let () =
   test 0 "";
   test 0 "a";

@@ -6,54 +6,34 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/15 10:00:36 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/15 10:18:29 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/15 14:02:34 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
-let nexta a b c =
-  if b * 10 + c = 99 then
-	a + 1
+let is_valid i =
+  let d3 = i / 100 in
+  let d2 = i / 10 mod 10 in
+  let d1 = i mod 10 in
+  if d3 < d2 && d2 < d1 && d1 <> d2 && d2 <> d3 && d3 <> d1 then
+	true
   else
-	a
+	false
 
-let nextb b c =
-  if c = 9 then
-	begin
-	  if b = 9 then
-		0
-	  else
-		b + 1
-	end
-  else
-	b
-
-let nextc c =
-  if c = 9 then
-	0
-  else
-	c + 1
-
-let print a b c comma =
+let print i comma =
   if comma then
 	print_string ", ";
-  print_int a;
-  print_int b;
-  print_int c
-			
-let rec loop a b c comma =
-  if a > 7 then
-	()
-  else
+  print_int i
+
+let rec loop i comma =
+  if i <= 789 then
 	begin
-	  begin
-		if a <> b && a <> c && c <> b && a < b && b < c then
-		  print a b c comma
-	  end;
-	  loop (nexta a b c) (nextb b c) (nextc c) true
+	  if is_valid i then
+		print i comma;
+	  loop (i + 1) true
 	end
-	  
+
 let ft_print_comb () =
-  loop 0 1 2 false;
+  loop 012 false;
   print_string "\n"
 
 let () =
