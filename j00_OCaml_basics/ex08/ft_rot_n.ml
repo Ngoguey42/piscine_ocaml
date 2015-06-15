@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/15 12:03:19 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/15 13:14:55 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/15 18:07:50 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -39,10 +39,7 @@ let rot i c =
 	c
 
 let ft_rot_n i s =
-  let rot c =
-	rot i c
-  in
-  String.map rot s
+  String.map (rot i) s
 
 let test i s =
   Printf.printf "Test rot%-3d \"%s\"=>\"%s\"  \n%!" i s (ft_rot_n i s)
