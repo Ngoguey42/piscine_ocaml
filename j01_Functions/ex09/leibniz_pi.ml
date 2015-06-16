@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/16 14:09:16 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/16 14:52:12 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/16 15:11:49 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -20,7 +20,7 @@ let leibniz_pi dt =
 	  false
   in
   let found v =
-	let dt' = 1. -. v /. pi4 in
+	let dt' = (v -. pi4) *. 4. in
 	if dt' >= 0. then
 	  compare dt'
 	else
@@ -47,12 +47,13 @@ let test dt =
   Printf.printf "%d\n%!" (leibniz_pi dt)
   
 let () =
-  test (10.			/. 100.);
-  test (1.			/. 100.);
-  test (0.1			/. 100.);
-  test (0.01		/. 100.);
-  test (0.001		/. 100.);
-  test (0.0001		/. 100.);
-  test (0.00001		/. 100.);
-  test (0.000001	/. 100.);
-  test (0.0000001	/. 100.);
+  test (1.			);
+  test (0.1			);
+  test (0.01		);
+  test (0.001		);
+  test (0.0001		);
+  test (0.00001		);
+  test (0.000001	);
+  test (0.0000001	);
+  test (0.00000001	);
+  test (0.000000001	);
