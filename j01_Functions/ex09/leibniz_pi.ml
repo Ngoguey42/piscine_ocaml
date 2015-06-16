@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/16 14:09:16 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/16 15:14:27 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/16 18:30:08 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -30,17 +30,17 @@ let leibniz_pi dt =
   let formula i =
 	(-1.) ** i /. (2. *. i +. 1.)
   in
-  let rec loop i i' acc =
+  let rec loop i acc =
 	if found acc then
 		i
 	else
-		loop (i + 1) (i' +. 1.) (acc +. formula i')
+		loop (i + 1) (acc +. formula (float_of_int i))
   in
   
   if dt < 0. then
 	-1
   else
-	loop 0 0. 0.
+	loop 0 0.
 		
 let test dt =
   Printf.printf "Test with [%.15f] = %!" dt;

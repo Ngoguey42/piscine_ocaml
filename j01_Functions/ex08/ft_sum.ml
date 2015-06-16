@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/16 12:52:23 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/16 14:06:40 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/16 18:27:26 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -17,7 +17,10 @@ let ft_sum f x n =
 	else
 	  loop (i + 1) (acc +. f i)
   in
-  loop x 0.
+  if n < x then
+	nan
+  else
+	loop x 0.
 
 let test f fname x n =
   Printf.printf "Test with [\027[35m%-19s\027[0m %d %d] = %f\n%!" fname x n (ft_sum f x n)
