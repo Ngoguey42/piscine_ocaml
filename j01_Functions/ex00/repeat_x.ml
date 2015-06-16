@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/16 09:13:54 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/16 09:19:22 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/16 09:46:05 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -20,7 +20,7 @@ let repeat_x n =
   in
 
   if n < 0 then
-	"error"
+	"Error"
   else
 	loop "" n
 
