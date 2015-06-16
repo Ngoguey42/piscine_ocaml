@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/16 14:09:16 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/16 15:11:49 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/16 15:14:27 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -43,7 +43,7 @@ let leibniz_pi dt =
 	loop 0 0. 0.
 		
 let test dt =
-  Printf.printf "Test with [%.15f aka %.13f%%] = %!" dt (dt *. 100.);
+  Printf.printf "Test with [%.15f] = %!" dt;
   Printf.printf "%d\n%!" (leibniz_pi dt)
   
 let () =
@@ -56,4 +56,4 @@ let () =
   test (0.000001	);
   test (0.0000001	);
   test (0.00000001	);
-  test (0.000000001	);
+  test (0.000_000_001	);
