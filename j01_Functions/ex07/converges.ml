@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/16 12:07:16 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/16 12:36:56 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/16 13:03:19 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -26,14 +26,20 @@ let converges f x n =
   if n < 0 then
 	false
   else
-	loop n x
-
-
+	(* loop n x *)
+	loop (n + 1) x
 
 let test f fname x n =
-  Printf.printf "Test with [\027[35m%-16s\027[0m %d %d] = %B\n%!" fname x n (converges f x n)
+  Printf.printf "Test with [\027[35m%-19s\027[0m %d %d] = %B\n%!" fname x n (converges f x n)
 
 let test' x n =
+  test (( * ) 2) "(( * ) 2)" x n;
+  test (fun x -> x / 2) "(fun x -> x / 2)" x n
+
+let testf f fname x n =
+  Printf.printf "Test with [\027[35m%-19s\027[0m %f %d] = %B\n%!" fname x n (converges f x n)
+
+let testf' x n =
   test (( * ) 2) "(( * ) 2)" x n;
   test (fun x -> x / 2) "(fun x -> x / 2)" x n
 
@@ -57,3 +63,7 @@ let () =
   test (( * ) 2) "(( * ) 2)" 2 5;
   test (fun x -> x / 2) "(fun x -> x / 2)" 2 3;
   test (fun x -> x / 2) "(fun x -> x / 2)" 2 2;
+  test (fun x -> x / 2) "(fun x -> x / 2)" 2 1;
+  testf (( *. ) 2.) "(( *. ) 2.)" 2. 5;
+  testf (fun x -> x /. 2.) "(fun x -> x /. 2.)" 2. 3;
+  testf (fun x -> x /. 2.) "(fun x -> x /. 2.)" 2. 2;
