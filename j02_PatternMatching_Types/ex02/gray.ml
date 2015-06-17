@@ -6,13 +6,16 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/17 16:11:06 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/17 17:34:44 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/17 17:44:27 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
 let gray n =
   (* New string with swaped char *)
-  let swap_char c = if c = '0' then '1' else '0' in
+  let swap_char = function
+	| '0'		-> '1'
+	| _			-> '0'
+  in				 
   let mapifun changei curi c = if changei = curi then swap_char c else c in
   let swap str i = String.mapi (mapifun (n - i - 1)) str in
   (* Loop *)
