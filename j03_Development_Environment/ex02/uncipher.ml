@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/18 16:42:28 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/18 18:07:19 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/18 18:13:34 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -20,18 +20,7 @@ let rotglobal i s =
 	| _						-> false
   in
   let dorot c i base =
-	(* let sum = int_of_char c + i - base in *)
 	let sum = (int_of_char c + i - base) mod 26 in
-	(* Printf.printf "\n%!"; *)
-	(* let sum' = sum mod 26 in *)
-	(* print_char c; *)
-	(* print_char ' '; *)
-	(* print_char (char_of_int (sum mod 26 + base)); *)
-	(* print_char ' '; *)
-	(* print_int (sum); print_char ' '; *)
-	(* print_int sum'; print_char ' '; *)
-	(* print_int (sum' + base); print_char ' '; *)
-	(* print_char '\n'; *)
 	if sum < 0 then
 	  char_of_int (26 + sum + base)
 	else
