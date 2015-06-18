@@ -6,13 +6,13 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/06/18 13:44:39 by ngoguey           #+#    #+#              #
-#    Updated: 2015/06/18 14:28:27 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/06/18 14:29:33 by ngoguey          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-NAME = ft_graphics
+NAME = gardening
 
-SOURCES = ft_graphics.ml
+SOURCES = gardening.ml
 
 CAMLC = ocamlc
 CAMLOPT = ocamlopt
@@ -49,7 +49,7 @@ $(OPTOBJS): $(OBJPATH)/%.cmx : $(SRCPATH)/%.ml
 	$(CAMLOPT) -o $@ -c $<
 
 clean:
-	rm -f $(OBJPATH)/*.cm[iox]
+	rm -f $(OBJPATH)/*.cm[iox] 
 	rm -f $(OBJPATH)/$(NAME).o
 
 fclean: clean
