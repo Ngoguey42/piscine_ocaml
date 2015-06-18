@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/18 18:19:55 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/18 19:22:34 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/18 19:25:49 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -53,7 +53,11 @@ let add_bst t v =
   helper t
 
 let delete_bst t v =
-  let rec merge a b =
+  let rec min = function
+	| Node(v', Nil, _)				  			-> v'
+	| Node(_, a, _)								-> min a
+	| _											-> failwith "unreachable"; v
+  and merge a b =
 	match a, b with
 	| Nil, x | x, Nil							-> x
 	| _											->let minb = min b in
