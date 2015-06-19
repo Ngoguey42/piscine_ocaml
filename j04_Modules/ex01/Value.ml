@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/19 14:35:16 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/19 14:48:13 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/19 16:52:05 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -86,7 +86,7 @@ let next (c: t) =
   in
   next_of_t c
 
-let prev (c: t) =
+let previous (c: t) =
   let prev_of_t = function
 	| T2-> invalid_arg "T2"
 	| T3-> T2

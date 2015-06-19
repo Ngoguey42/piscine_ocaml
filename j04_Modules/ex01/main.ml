@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/19 15:12:25 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/19 15:12:25 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/19 16:52:15 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -21,8 +21,8 @@ let test i =
 	  let s2 = toStringVerbose c in
 	  Printf.printf "Card: (%2d) \"%2s\" \"%5s\" next:%!" s s1 s2;
 	  let s3 = toString (next c) in
-	  Printf.printf "%2s prev:%!" s3;
-	  let s4 = toString (prev c) in
+	  Printf.printf "%2s previous:%!" s3;
+	  let s4 = toString (previous c) in
 	  Printf.printf "%2s\n%!" s4
 	end
   with invalid_arg -> Printf.printf "OMG CATCH\n%!"

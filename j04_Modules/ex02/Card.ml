@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/19 15:15:14 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/19 16:24:22 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/19 16:50:30 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -111,7 +111,7 @@ module Value = struct
 	  in
 	  next_of_t c
 
-	let prev (c: t) =
+	let previous (c: t) =
 	  let prev_of_t = function
 		| T2-> invalid_arg "T2"
 		| T3-> T2
