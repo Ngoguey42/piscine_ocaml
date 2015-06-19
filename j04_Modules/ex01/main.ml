@@ -1,10 +1,20 @@
+(* ************************************************************************** *)
+(*                                                                            *)
+(*                                                        :::      ::::::::   *)
+(*   main.ml                                            :+:      :+:    :+:   *)
+(*                                                    +:+ +:+         +:+     *)
+(*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
+(*                                                +#+#+#+#+#+   +#+           *)
+(*   Created: 2015/06/19 15:12:25 by ngoguey           #+#    #+#             *)
+(*   Updated: 2015/06/19 15:12:25 by ngoguey          ###   ########.fr       *)
+(*                                                                            *)
+(* ************************************************************************** *)
 
 open Value
 open List
 
 let test i =
   try begin
-	  (* Printf.printf "trying %d%!" i ; *)
 	  let c = List.nth Value.all i in
 	  let s = toInt c in
 	  let s1 = toString c in

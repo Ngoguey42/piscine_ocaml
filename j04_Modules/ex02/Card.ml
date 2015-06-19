@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/19 15:15:14 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/19 16:16:12 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/19 16:24:22 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -191,4 +191,14 @@ let best (l: t list) =
   match l with
   | [] 								-> invalid_arg "empty"
   | hd::tl							-> List.fold_left max hd tl
-	
+
+let isOf ((_, c): t) c' =
+  (Color.toString c) = (Color.toString c')
+let isSpade ((_, c): t) =
+  (Color.toString c) = "S"
+let isHeart ((_, c): t) =
+  (Color.toString c) = "H"
+let isDiamond ((_, c): t) =
+  (Color.toString c) = "D"
+let isClub ((_, c): t) =
+  (Color.toString c) = "C"
