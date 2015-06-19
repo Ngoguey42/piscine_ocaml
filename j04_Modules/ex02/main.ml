@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/19 16:25:19 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/19 16:46:14 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/19 16:56:31 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -32,6 +32,8 @@ let test l =
   Printf.printf "isHeart Card.Color.Club = %B\n%!" (Card.isHeart c);
   Printf.printf "isDiamond Card.Color.Club = %B\n%!" (Card.isDiamond c);
   Printf.printf "isClub Card.Color.Club = %B\n%!" (Card.isClub c);
+  Printf.printf "GetValue: %s\n%!" (Card.Value.toStringVerbose (Card.getValue c));
+  Printf.printf "GetColor: %s\n%!" (Card.Color.toStringVerbose (Card.getColor c));
   Printf.printf "Comparing the two first\n%!";
   let c' = List.nth l 1 in
   let cmp = compare c c' in
