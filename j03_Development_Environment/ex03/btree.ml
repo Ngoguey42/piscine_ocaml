@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/18 18:19:55 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/19 12:23:41 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/19 12:46:40 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -21,8 +21,7 @@ let height t =
   helper t 0
 
 let is_bst t =
-  let rec helper t =
-	match t with
+  let rec helper = function
 	| Nil										-> true
 	| Node(v, _, Node(v', _, _)) when v' < v	-> false
 	| Node(v, Node(v', _, _), _) when v' > v	-> false
@@ -30,6 +29,7 @@ let is_bst t =
   in
   helper t
 
+(* IS_PERFECT = IS_BALANCE WITH (DELTA = 0) *)
 let is_perfect t =
   let rec helper = function
 	| Nil										-> true
@@ -38,10 +38,15 @@ let is_perfect t =
   in
   helper t
 
-let is_balanced = function
-  | Node(_, a, b) when abs ((height a) - (height b)) > 1	-> false
-  | _														-> true
-
+let is_balanced t =
+  let rec helper = function
+	| Nil										-> true
+	| Node(_, a, b)
+		 when abs ((height a) - (height b)) > 1	-> false
+	| Node(_, a, b)								-> (helper a) && (helper b)
+  in
+  helper t
+																 
 let search_bst t v =
   let rec helper = function
 	| Nil										-> false
