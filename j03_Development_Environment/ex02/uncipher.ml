@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/18 16:42:28 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/18 18:13:34 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/19 18:36:34 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -42,7 +42,7 @@ let unrot42 s =
 let uncaesar i s =
   rotglobal (-i) s
 
-let ft_uncrypt s fl =
+let ft_uncrypt s fl : string =
   let rec helper s fl =
 	match fl with
 	| []					-> s
