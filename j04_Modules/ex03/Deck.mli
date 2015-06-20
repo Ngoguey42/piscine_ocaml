@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/20 19:18:59 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/20 19:19:19 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/20 19:47:16 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -72,5 +72,3 @@ val toStringList : t -> string list
 val toStringListVerbose : t -> string list
 
 val drawCard : t -> Card.t * t
-
-val isEmpty : t -> bool
