@@ -6,13 +6,10 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/22 10:27:35 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/22 10:51:18 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/22 12:04:01 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
-(*
-ocamlopt unix.cmxa micronap.ml && ./a.out NUMBER
-*)
 
 let my_sleep () = Unix.sleep 1
 
@@ -41,3 +38,14 @@ let () =
 	-> print_endline ("Catched \"" ^ "int_of_string" ^ "\" please give a number")
   | Failure m
 	-> print_endline ("Catched \"" ^ m ^ "\" please give a positive number")
+(*
+ocamlopt unix.cmxa micronap.ml && ./a.out 
+ocamlopt unix.cmxa micronap.ml && ./a.out "-1"
+ocamlopt unix.cmxa micronap.ml && ./a.out ""
+ocamlopt unix.cmxa micronap.ml && ./a.out "prout"
+ocamlopt unix.cmxa micronap.ml && ./a.out 0
+ocamlopt unix.cmxa micronap.ml && ./a.out 1
+ocamlopt unix.cmxa micronap.ml && ./a.out 2
+
+*)
+
