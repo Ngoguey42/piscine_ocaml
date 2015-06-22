@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/22 12:21:03 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/22 12:46:24 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/22 12:46:40 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -16,11 +16,6 @@ let eu_dist a b =
 	failwith "Arrays have different lengths";
   if n = 0 then
 	failwith "Arrays are empty !!";
-  (* let square i av = *)
-  (* 	let bv = b.(i) in *)
-  (* 	(av - bv) ** 2. *)
-  (* in *)
-  (* let squaredarray = Array.mapi square a in *)
   let square (acc, i) av =
 	let bv = b.(i) in
 	((av -. bv) ** 2., i + 1)
