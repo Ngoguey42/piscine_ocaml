@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/22 13:09:26 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/22 14:28:12 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/22 14:36:14 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -15,6 +15,7 @@ let is_float_char = function
   | "4" | "5" | "6" | "7" | "8" | "9"	-> true
   | _ 									-> false
 
+(* Ugliest code i've ever written, for real *)
 let parse_line fchan =
   let l = ref [] in
   let nbrstr = ref "" in
@@ -23,8 +24,6 @@ let parse_line fchan =
 	try
 	  while true do
 		let c = really_input_string fchan 1 in
-		(* let c = input_char fchan in *)
-		(* Printf.printf "%c%!" c; *)
 		if c = "\n" then
 		  raise (Failure "EOL")
 		else if c = " " then
@@ -41,9 +40,8 @@ let parse_line fchan =
 	  done
 	with Failure "EOL"	-> ()
   end;
-  (!l, !classstr)
+  (Array.of_list !l, !classstr)
 	
-
 let examples_of_files fname =
   try
 	let fchan = open_in fname in
@@ -52,18 +50,14 @@ let examples_of_files fname =
 	  try
 		while true do
 		  l := !l @ [parse_line fchan]
-					  (* let line = input_line fchan in *)
-					  (* l := !l @ [parse_line line] *)
 		done;
 	  with
 	  | End_of_file	-> ();
 	end;
 	!l
   with
-  (* | Failure "no csv found :(" *)
-  (* -> print_endline ("Catched : no csv found in file !!") *)
-  | Failure "problem in csv format"
-	-> print_endline ("Catched : csv file corrupted !!"); []
+  | Failure "float_of_string"
+	-> print_endline ("Catched \"float_of_string\" csv file corrupted !!"); []
   | Invalid_argument m
 	-> print_endline ("Catched \"" ^ m ^ "\" please give some arguments"); []
   | Sys_error m
@@ -76,7 +70,7 @@ let test fname =
   Printf.printf "List length: %d\n%!" n;
   for i = 0 to List.length l - 1 do
 	let (fl, cl) as l = List.nth l i in
-	Printf.printf "Line %3d, class %s, numfloats %d\n%!" i cl (List.length fl);
+	Printf.printf "Line %3d, class %s, numfloats %d\n%!" i cl (Array.length fl);
 	
   done;
   Printf.printf "\n%!"
