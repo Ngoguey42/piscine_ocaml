@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/22 13:09:26 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/23 18:36:06 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/23 19:14:11 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -21,7 +21,6 @@ let print_float_array a =
   done;
   print_string "|]"
 			   
-
 							 
 let eu_dist a b =
   let n = Array.length a in
@@ -43,11 +42,11 @@ let one_nn (l: radar list) (r: radar) =
   let rec helper l closestdiff closest =
 	match l with
 	| []								->
-	   Printf.printf "BESTIDEIFIF %f\n%!" closestdiff;
+	   (* Printf.printf "BESTIDEIFIF %f\n%!" closestdiff; *)
 	   (closestdiff, closest)
 	| hd::tl
 	  -> let diff = rad_eu_list r hd in
-		 Printf.printf "difF %f %f\n%!" diff closestdiff;
+		 (* Printf.printf "difF %f %f\n%!" diff closestdiff; *)
 		 if closestdiff < 0. || diff < closestdiff then
 		   helper tl diff hd
 		 else
@@ -55,7 +54,7 @@ let one_nn (l: radar list) (r: radar) =
   in
   let (diff, closest) = helper l (-.1.) ([||], "") in
   let (lol, cl) = closest in
-  print_float_array lol;
+  (* print_float_array lol; *)
   cl
 
 let is_float_char = function
