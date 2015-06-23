@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/23 12:39:34 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/23 13:18:33 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/23 13:41:55 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -14,7 +14,6 @@ module StringHashtbl = Hashtbl.Make(
 						   struct
 							 type t = string
 							 let equal = (=)
-							 let hash = Hashtbl.hash
 							 let hash = Hashtbl.seeded_hash 42
 						   end)
 
