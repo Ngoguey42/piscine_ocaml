@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/23 13:50:07 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/23 15:25:40 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/23 15:28:27 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -121,21 +121,24 @@ module Make: MAKE =
 	(* t -> t -> t *)
 
 	let rec foreach v1 v2 f =
-	  if v1 <= v2 then
+	  if v1 < v2 then
 		begin
 		  f v1;
 		  foreach (v1 + 1) v2 f
 		end
+	  else if v1 > v2 then
+		begin
+		  f v1;
+		  foreach (v1 - 1) v2 f
+		end
+	  else
+		  f v1;
 		  (* t -> t -> (t -> unit) -> unit *)
-		  
   end
-	
 	
 module Fixed4 : FIXED = Make (struct let bits = 4 end)
 module Fixed8 : FIXED = Make (struct let bits = 8 end)
 
-
-							 
 let test2t a f sf =
   Printf.printf "Test with [%s %f] = %f\n%!"
 				sf (Fixed8.to_float a) (Fixed8.to_float (f a))
@@ -148,14 +151,13 @@ let test2t1b a b f sf =
   Printf.printf "Test with [%s %f %f] = %B\n%!"
 				sf (Fixed8.to_float a) (Fixed8.to_float b) ((f a b))
 				
-				
-				
 let () =
   let x8 = Fixed8.of_float 21.10 in
   let y8 = Fixed8.of_float 21.32 in
   let r8 = Fixed8.add x8 y8 in
   print_endline (Fixed8.to_string r8);
   Fixed4.foreach (Fixed4.zero) (Fixed4.one) (fun f -> print_endline (Fixed4.to_string f));
+  Fixed4.foreach (Fixed4.one) (Fixed4.zero) (fun f -> print_endline (Fixed4.to_string f));
   let a = Fixed8.of_float ~-.2.12 in 
   let b = Fixed8.of_int 42 in
   test2t a Fixed8.succ "succ";
@@ -172,4 +174,3 @@ let () =
   test3t a b Fixed8.sub "sub";
   test3t a b Fixed8.mul "mul";
   test3t a b Fixed8.div "div";
-  
