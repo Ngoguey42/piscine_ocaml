@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/23 13:50:07 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/23 14:53:42 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/23 15:25:40 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -50,8 +50,12 @@ module Make: MAKE =
 	type t = int
 	let base = 1 lsl Truc.bits
 	let basef = float_of_int base
-							 
-	let of_float v1 = int_of_float (v1 *. basef)
+
+	let of_float v1 =
+	  if v1 < 0. then
+		int_of_float (v1 *. basef -. 0.5)
+	  else
+		int_of_float (v1 *. basef +. 0.5)
 	(* float -> t *)
 
 	let of_int v1 = v1 * base
@@ -108,10 +112,12 @@ module Make: MAKE =
 	let sub v1 v2 = v1 - v2
 	(* t -> t -> t *)
 
-	let mul v1 v2 = v1 * v2
-	(* t -> t -> t *)
+	let mul v1 v2 =
+	  of_float ((to_float v1) *. (to_float v2))
+	  (* t -> t -> t *)
 
-	let div v1 v2 = v1 / v2
+	let div v1 v2 =
+	  of_float ((to_float v1) /. (to_float v2))
 	(* t -> t -> t *)
 
 	let rec foreach v1 v2 f =
@@ -128,9 +134,42 @@ module Make: MAKE =
 module Fixed4 : FIXED = Make (struct let bits = 4 end)
 module Fixed8 : FIXED = Make (struct let bits = 8 end)
 
+
+							 
+let test2t a f sf =
+  Printf.printf "Test with [%s %f] = %f\n%!"
+				sf (Fixed8.to_float a) (Fixed8.to_float (f a))
+
+let test3t a b f sf =
+  Printf.printf "Test with [%s %f %f] = %f\n%!"
+				sf (Fixed8.to_float a) (Fixed8.to_float b) (Fixed8.to_float (f a b))
+								
+let test2t1b a b f sf =
+  Printf.printf "Test with [%s %f %f] = %B\n%!"
+				sf (Fixed8.to_float a) (Fixed8.to_float b) ((f a b))
+				
+				
+				
 let () =
   let x8 = Fixed8.of_float 21.10 in
   let y8 = Fixed8.of_float 21.32 in
   let r8 = Fixed8.add x8 y8 in
   print_endline (Fixed8.to_string r8);
-  Fixed4.foreach (Fixed4.zero) (Fixed4.one) (fun f -> print_endline (Fixed4.to_string f))
+  Fixed4.foreach (Fixed4.zero) (Fixed4.one) (fun f -> print_endline (Fixed4.to_string f));
+  let a = Fixed8.of_float ~-.2.12 in 
+  let b = Fixed8.of_int 42 in
+  test2t a Fixed8.succ "succ";
+  test2t a Fixed8.pred "pred";
+  test3t a b Fixed8.min "min";
+  test3t a b Fixed8.max "max";
+  test2t1b a b Fixed8.gth "gth";
+  test2t1b a b Fixed8.lth "lth";
+  test2t1b b b Fixed8.gte "gte";
+  test2t1b b b Fixed8.lte "lte";
+  test2t1b a a Fixed8.eqp "eqp";
+  test2t1b a a Fixed8.eqs "eqs";
+  test3t a b Fixed8.add "add";
+  test3t a b Fixed8.sub "sub";
+  test3t a b Fixed8.mul "mul";
+  test3t a b Fixed8.div "div";
+  
