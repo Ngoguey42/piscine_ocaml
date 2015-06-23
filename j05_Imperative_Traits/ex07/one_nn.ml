@@ -6,12 +6,23 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/22 13:09:26 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/22 15:19:54 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/23 18:36:06 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
 type radar = float array * string
 
+let print_float_array a =
+  print_string "[|";
+  for i = 0 to ((Array.length a) - 1) do
+	if i > 0 then
+	  print_string "; ";
+	print_float a.(i)
+  done;
+  print_string "|]"
+			   
+
+							 
 let eu_dist a b =
   let n = Array.length a in
   if n <> Array.length b then
@@ -20,7 +31,7 @@ let eu_dist a b =
 	failwith "Arrays are empty !!";
   let square (acc, i) av =
 	let bv = b.(i) in
-	((av -. bv) ** 2., i + 1)
+	((av -. bv) ** 2. +. acc, i + 1)
   in
   let (squaredsum, _) = Array.fold_left square (0., 0) a in
   sqrt squaredsum
@@ -31,16 +42,20 @@ let rad_eu_list (a, _) (b, _q) =
 let one_nn (l: radar list) (r: radar) =
   let rec helper l closestdiff closest =
 	match l with
-	| []								-> (closestdiff, closest)
+	| []								->
+	   Printf.printf "BESTIDEIFIF %f\n%!" closestdiff;
+	   (closestdiff, closest)
 	| hd::tl
 	  -> let diff = rad_eu_list r hd in
+		 Printf.printf "difF %f %f\n%!" diff closestdiff;
 		 if closestdiff < 0. || diff < closestdiff then
 		   helper tl diff hd
 		 else
 		   helper tl closestdiff closest
   in
   let (diff, closest) = helper l (-.1.) ([||], "") in
-  let (_, cl) = closest in
+  let (lol, cl) = closest in
+  print_float_array lol;
   cl
 
 let is_float_char = function

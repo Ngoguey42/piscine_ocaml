@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/22 13:09:26 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/22 14:36:14 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/23 17:08:28 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -42,7 +42,7 @@ let parse_line fchan =
   end;
   (Array.of_list !l, !classstr)
 	
-let examples_of_files fname =
+let examples_of_file fname =
   try
 	let fchan = open_in fname in
 	let l = ref [] in
@@ -65,7 +65,7 @@ let examples_of_files fname =
 
 let test fname =
   Printf.printf "Test with %s:\n%!" fname;
-  let l = examples_of_files fname in
+  let l = examples_of_file fname in
   let n = List.length l in
   Printf.printf "List length: %d\n%!" n;
   for i = 0 to List.length l - 1 do

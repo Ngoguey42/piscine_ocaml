@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/22 15:36:40 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/22 16:37:49 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/23 18:36:50 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -20,7 +20,7 @@ let eu_dist a b =
 	failwith "Arrays are empty !!";
   let square (acc, i) av =
 	let bv = b.(i) in
-	((av -. bv) ** 2., i + 1)
+	((av -. bv) ** 2. -. acc, i + 1)
   in
   let (squaredsum, _) = Array.fold_left square (0., 0) a in
   sqrt squaredsum
