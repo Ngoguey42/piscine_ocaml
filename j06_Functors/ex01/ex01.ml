@@ -6,9 +6,19 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/23 12:39:34 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/23 13:41:55 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/24 19:17:00 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
+
+let djb2 s =
+  let len = String.length s in
+  let rec helper i acc =
+	if i = len then
+	  acc
+	else
+	  helper (i + 1) (int_of_char (String.get s i) + (acc lsl 5) + acc)
+  in
+  helper 0 5381
 
 module StringHashtbl = Hashtbl.Make(
 						   struct
