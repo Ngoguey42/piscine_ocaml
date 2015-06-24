@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/24 15:05:38 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/24 15:21:34 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/24 16:08:05 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -22,14 +22,21 @@ object
 					 ^ ", " ^ (string_of_int hp) ^ "hp"
 					 ^ ", sidekick(" ^ (sidekick#to_string) ^ ")"
   method talk = print_endline ("Hi! I'm the Doctor!")
-  method travel_in_time start areival =
-	""
-	^ "  ____[   ]____\n"
-	^ "  [ POLICE BOX ]  \n"
-	^ "| [ ## ]  [ ## ] |\n"
-	^ "| [ [] ]  [ oo ] |\n"
-	^ "| [    ]  [    ] |\n"
-	^ "| [    ]  [    ] |\n"
-	^ "| [    ]  [    ] |\n"
-					   end
-
+  method travel_in_time start arrival =
+	print_endline (""
+				   ^ "  ____[   ]____\n"
+				   ^ "  [ POLICE BOX ]  \n"
+				   ^ "| [ ## ]  [ ## ] |\n"
+				   ^ "| [ [] ]  [ oo ] |\n"
+				   ^ "| [    ]  [    ] |\n"
+				   ^ "| [    ]  [    ] |\n"
+				   ^ "| [    ]  [    ] |\n"
+				   ^ "| [    ]  [    ] |\n"
+				   ^ "  ______________  \n");
+	{< age = (arrival - start) + age >}
+  method use_sonic_screwdriver =
+	print_endline "Whiiiiwhiiiwhiii Whiiiiwhiiiwhiii Whiiiiwhiiiwhiii"
+  method private regenerate =
+	{< hp = 100 >}
+	
+end

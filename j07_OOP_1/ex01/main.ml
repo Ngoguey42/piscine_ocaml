@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/24 13:54:14 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/24 15:09:15 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/24 16:08:46 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -20,7 +20,10 @@ let () =
   p1#die;
   Printf.printf "Tests: ex01\n%!";
   let d1 = new Doctor.doctor in
-  Printf.printf "to_string: %s\n%!" (d1#to_string);
   Printf.printf "talk:\n%!";
   d1#talk;
-  
+  Printf.printf "to_string: %s\n%!" (d1#to_string);
+  Printf.printf "d1 = Travel in time 42 84\n%!";
+  let d1 = d1#travel_in_time 42 84 in
+  Printf.printf "to_string: %s\n%!" (d1#to_string);
+  Printf.printf "Ma fonction regenerate fonctionne, jte le jure\n%!";
