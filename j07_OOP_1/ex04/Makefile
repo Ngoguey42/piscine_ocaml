@@ -6,14 +6,14 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/06/20 11:16:05 by jaguillo          #+#    #+#              #
-#    Updated: 2015/06/24 18:40:31 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/06/24 19:07:24 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := a.out
 
-OCB := ocamlc -g
-OCC := ocamlopt
+OCB := ocamlc.opt -g
+OCC := ocamlopt.opt
 OCD := ocamldep
 
 OBJS_DIR := bin/
@@ -60,6 +60,14 @@ $(OBJS_DIR)%.cmi: $(SRCS_DIR)%.mli
 	@$(OCC) -I $(OBJS_DIR) -o $@ -c $<
 	@echo "$<"
 
+i:
+	@for i in $(SRCS); do						\
+		echo "\033[33m$$i\033[0m";				\
+		$(OCC) $(FLAGS) -i $$i 2>/dev/null ||	\
+			(printf "\033[31m";					\
+			$(OCC) $(FLAGS) -i $$i;				\
+			printf "\033[0m");					\
+	done
 
 
 $(SRCS_DIR) $(OBJS_DIR):
