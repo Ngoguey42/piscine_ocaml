@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/23 12:39:34 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/24 19:17:00 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/24 19:17:25 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -20,13 +20,13 @@ let djb2 s =
   in
   helper 0 5381
 
-module StringHashtbl = Hashtbl.Make(
-						   struct
-							 type t = string
-							 let equal = (=)
-							 let hash = Hashtbl.seeded_hash 42
-						   end)
-
+module StringHashtbl =
+  Hashtbl.Make(
+	  struct
+		type t = string
+		let equal = (=)
+		let hash = Hashtbl.seeded_hash 42
+	  end)
 
 let () =
   let ht = StringHashtbl.create 5 in
