@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/23 13:50:07 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/23 15:28:27 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/24 19:53:43 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -43,20 +43,21 @@ module type FRACTIONNAL_BITS =
 
 module type MAKE =
   functor (Truc: FRACTIONNAL_BITS) -> FIXED
-
+										
 module Make: MAKE =
   functor (Truc: FRACTIONNAL_BITS) ->
   struct
 	type t = int
 	let base = 1 lsl Truc.bits
 	let basef = float_of_int base
-
+							 
 	let of_float v1 =
-	  if v1 < 0. then
-		int_of_float (v1 *. basef -. 0.5)
+	  let v1' = v1 *. basef in
+	  if v1' < 0. then
+		int_of_float (v1' -. 0.5)
 	  else
-		int_of_float (v1 *. basef +. 0.5)
-	(* float -> t *)
+		int_of_float (v1' +. 0.5)
+	float -> t
 
 	let of_int v1 = v1 * base
 	(* int -> t *)
@@ -113,8 +114,8 @@ module Make: MAKE =
 	(* t -> t -> t *)
 
 	let mul v1 v2 =
-	  of_float ((to_float v1) *. (to_float v2))
-	  (* t -> t -> t *)
+	  int_of_float ((to_float v1) *. (float_of_int v2))
+	(* t -> t -> t *)
 
 	let div v1 v2 =
 	  of_float ((to_float v1) /. (to_float v2))
@@ -132,8 +133,8 @@ module Make: MAKE =
 		  foreach (v1 - 1) v2 f
 		end
 	  else
-		  f v1;
-		  (* t -> t -> (t -> unit) -> unit *)
+		f v1;
+	  (* t -> t -> (t -> unit) -> unit *)
   end
 	
 module Fixed4 : FIXED = Make (struct let bits = 4 end)
@@ -146,7 +147,7 @@ let test2t a f sf =
 let test3t a b f sf =
   Printf.printf "Test with [%s %f %f] = %f\n%!"
 				sf (Fixed8.to_float a) (Fixed8.to_float b) (Fixed8.to_float (f a b))
-								
+				
 let test2t1b a b f sf =
   Printf.printf "Test with [%s %f %f] = %B\n%!"
 				sf (Fixed8.to_float a) (Fixed8.to_float b) ((f a b))
@@ -173,4 +174,37 @@ let () =
   test3t a b Fixed8.add "add";
   test3t a b Fixed8.sub "sub";
   test3t a b Fixed8.mul "mul";
-  test3t a b Fixed8.div "div";
+  test3t a b Fixed8.div "div"
+
+
+  let test a b =
+	Printf.printf "---> %s  %s\n" (Fixed4.to_string a) (Fixed4.to_string b);
+	Printf.printf " to_int : %d\n" (Fixed4.to_int b);
+	Printf.printf " to_float : %f\n" (Fixed4.to_float b);
+	Printf.printf " succ : %f\n" (Fixed4.to_float (Fixed4.succ b));
+	Printf.printf " pred : %f\n" (Fixed4.to_float (Fixed4.pred b));
+	Printf.printf " min : %f\n" (Fixed4.to_float (Fixed4.min a b));
+	Printf.printf " max : %f\n" (Fixed4.to_float (Fixed4.max a b));
+	Printf.printf " gth : %B\n" (Fixed4.gth a b);
+	Printf.printf " lth : %B\n" (Fixed4.lth a b);
+	Printf.printf " gte : %B\n" (Fixed4.gte a b);
+	Printf.printf " lte : %B\n" (Fixed4.lte a b);
+	Printf.printf " eqp : %B\n" (Fixed4.eqp a b);
+	Printf.printf " eqs : %B\n" (Fixed4.eqs a b);
+	Printf.printf " add : %f\n" (Fixed4.to_float (Fixed4.add a b));
+	Printf.printf " sub : %f\n" (Fixed4.to_float (Fixed4.sub a b));
+	Printf.printf " mul : %f\n" (Fixed4.to_float (Fixed4.mul a b));
+	Printf.printf " div : %f\n" (Fixed4.to_float (Fixed4.div a b))
+
+let () =
+  let x8 = Fixed8.of_float 21.10 in
+  let y8 = Fixed8.of_float 21.32 in
+  let r8 = Fixed8.add x8 y8 in
+  print_endline (Fixed8.to_string r8);
+  Fixed4.foreach (Fixed4.zero) (Fixed4.one) (fun f -> print_endline (Fixed4.to_string f));
+  Fixed4.foreach (Fixed4.of_int 5) (Fixed4.of_int 6) (test (Fixed4.of_float 5.5))
+
+
+
+
+				 

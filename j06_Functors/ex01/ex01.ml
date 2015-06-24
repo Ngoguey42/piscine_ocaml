@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/23 12:39:34 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/24 19:17:25 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/24 19:28:54 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -25,7 +25,7 @@ module StringHashtbl =
 	  struct
 		type t = string
 		let equal = (=)
-		let hash = Hashtbl.seeded_hash 42
+		let hash = djb2
 	  end)
 
 let () =
