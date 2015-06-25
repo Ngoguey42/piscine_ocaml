@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/25 12:01:59 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/25 14:53:54 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/25 17:32:27 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -59,4 +59,8 @@ let () =
   Printf.printf "New Molecule: %s\n" (new Alkane.hexane)#to_string;
   Printf.printf "New Molecule: %s\n" (new Alkane.heptane)#to_string;
   Printf.printf "New Molecule: %s\n" (new Alkane.octane)#to_string;
-  
+  Printf.printf "\027[34m%s\027[0m\n%!" "Tests ex04:";
+  let a1 = new Alkane.methane in
+  let r1 = new Alkane.alkane_combustion [a1] in
+  Printf.printf "\027[36mNew reaction:\027[0m \n%s\nBalancing:\n%s\n"
+				r1#to_string (r1#balance)#to_string;
