@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/25 14:29:07 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/25 16:33:53 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/25 16:52:54 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -55,59 +55,40 @@ object (self)
   val _result: (Molecule.molecule * int) list =
 	[(new Molecule.carbon_dioxyde, 1); (new Molecule.water, 1)]
 	  
+	  
+	  
   method private _get_balancing l =
+	let parse_alkane_formula formula =
+	  let rec helper i nbracc =
+		match i with
+		| 0			-> 0
+		| _			->
+		   let c = String.get formula i in
+		   match c with
+		   | 'H' when nbracc = 0	-> 1
+		   | 'H'					-> nbracc
+		   | 'C'					-> helper (i + 1) nbracc
+		   | _						->
+			  (int_of_char c - int_of_char '0') + nbracc * 10
+	  in
+	  helper 0 0
+	in
 	let rec helper l ((nc, nh, no) as acc) =
 	  match l with
-	  | []					-> acc
-	  | (mol, n)::tl				->
+	  | []				-> acc
+	  | (mol, n)::tl	->
 		 let formula = mol#formula in
 		 match formula with
 		 | "O2"		-> helper tl (nc			,nh					,no + n*2)
 		 | "CO2"	-> helper tl (nc + n*2		,nh					,no + n*2)
 		 | "H2O"	-> helper tl (nc			,nh + n*2			,no + n)
-		 | _		-> let n' = (mol :> alkane)#get_n in
+		 | _		-> let n' = parse_alkane_formula mol#formula in
 					   helper tl (nc + n*n'		,nh + n*n'*2 + 2	,no)
 	in
 	helper l (0, 0, 0)
-	
-	
-	(* method private _get_balancing l = *)
-	(* 	let unpack_formula fo = *)
-	(* 	  let len = String.length fo in *)
-	(* 	  let is_upper = function *)
-	(* 		| 'A'..'Z'	-> true *)
-	(* 		| _			-> false *)
-	(* 	  in *)
-	(* 	  let is_digit = function *)
-	(* 		| '0'..'9'	-> true *)
-	(* 		| _			-> false *)
-	(* 	  in *)
-	(* 	  let rec elem_count elt i eltacc nbracc = *)
-	(* 		if i = len && eltacc = elt then *)
-	(* 		  1 *)
-	(* 		else if i = len then *)
-	(* 		  0 *)
-	(* 		else *)
-	(* 		  begin *)
-	(* 			let c = String.get fo i in *)
-	(* 			if is_upper c && eltacc = elt && nbracc = 0 then *)
-	(* 			  1 *)
-	(* 			else if is_upper c && eltacc = elt then *)
-	(* 			  nbracc *)
-	(* 			else if is_upper c then *)
-	(* 			  elem_count elt (i + 1) (String.make 1 c) 0 *)
-	(* 			else if  *)
-	(* 		  end *)
-	(* 		(\* if i = len then *\) *)
-	(* 	  in *)
-	(* 	in *)
-	(* 	let foreach_pack (nc, nh, no) (mol, n) = *)
-	(* 	  let (nc', nh', no') = unpack_formula mol#formula in *)
-	(* 	  (nc + nc' * n, nh + nh' * n, no + no' * n) *)
-	(* 	in *)
-	(* 	List.fold_left foreach_pack (0, 0, 0) *)
-	
-	(* method is_balanced = *)
+
+  method is_balanced =
+	(self#_get_balancing _start) = (self#_get_balancing _result)
 	
 	(* method get_start = _start *)
 	(* method get_result = _result *)
