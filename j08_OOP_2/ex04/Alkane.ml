@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/25 14:29:07 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/25 18:37:33 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/25 18:41:50 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -107,10 +107,22 @@ object (self)
   method balance =
 	(* BALANCE TREE WITH GIVEN DATAS *)
 	let balance_left fact ndiox =
-	  _start
+	  let rec helper l =
+		match l with
+		| []									-> []
+		| (mol, _)::tl when mol#formula = "O2"	-> (mol, ndiox)::(helper tl)
+		| (mol, n)::tl							-> (mol, n * fact)::(helper tl)
+	  in
+	  helper _start
 	in
 	let balance_right ncdiox nwater =
-	  _result
+	  let rec helper l =
+		match l with
+		| []									-> []
+		| (mol, _)::tl when mol#formula = "CO2"	-> (mol, ncdiox)::(helper tl)
+		| (mol, _)::tl							-> (mol, nwater)::(helper tl)
+	  in
+	  helper _result
 	in
 	(* PPCM (Least common multiple) *)
 	let rec ppcm a b fa fb =
