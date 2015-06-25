@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/25 12:01:59 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/25 12:06:17 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/25 13:55:34 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -28,3 +28,5 @@ let () =
   Printf.printf "New Atom:%! to_string: %s\n%!" (new Atom.argon)#to_string;
   Printf.printf "New Atom:%! to_string: %s\n%!" (new Atom.potassium)#to_string;
   Printf.printf "New Atom:%! to_string: %s\n%!" (new Atom.calcium)#to_string;
+  Printf.printf "Compare Al Al last: %B\n%!" ((new Atom.aluminum)#equals (new Atom.aluminum));
+  Printf.printf "Compare Al H last: %B\n%!" ((new Atom.aluminum)#equals (new Atom.hydrogen));

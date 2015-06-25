@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/25 12:01:59 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/25 13:30:10 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/25 13:56:49 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -28,8 +28,15 @@ let () =
   Printf.printf "New Atom:%! to_string: %s\n%!" (new Atom.argon)#to_string;
   Printf.printf "New Atom:%! to_string: %s\n%!" (new Atom.potassium)#to_string;
   Printf.printf "New Atom:%! to_string: %s\n%!" (new Atom.calcium)#to_string;
+  Printf.printf "Compare Al Al last: %B\n%!" ((new Atom.aluminum)#equals (new Atom.aluminum));
+  Printf.printf "Compare Al H last: %B\n%!" ((new Atom.aluminum)#equals (new Atom.hydrogen));
   Printf.printf "\027[34m%s\027[0m\n%!" "Tests ex01:";
   Printf.printf "New Molecule:%! to_string: %s\n%!" (new Molecule.water)#to_string;
-  Printf.printf "New Molecule:%! to_string: %s\n%!" (new Molecule.carbon_dioxyde)#to_string;
+  Printf.printf "New Molecule:%! to_string: %s\n%!" (new Molecule.carbon_monoxyde)#to_string;
+  Printf.printf "New Molecule:%! to_string: %s\n%!" (new Molecule.carbon_monoxyde)#to_string;
+  Printf.printf "New Molecule:%! to_string: %s\n%!" (new Molecule.aspirin)#to_string;
+  Printf.printf "New Molecule:%! to_string: %s\n%!" (new Molecule.caffeine)#to_string;
+  Printf.printf "Compare water water last: %B\n%!" ((new Molecule.water)#equals (new Molecule.water));
+  Printf.printf "Compare water aspirin last: %B\n%!" ((new Molecule.water)#equals (new Molecule.aspirin));
   
   

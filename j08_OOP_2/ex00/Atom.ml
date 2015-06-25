@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/25 11:40:08 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/25 12:05:02 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/25 13:52:17 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -22,6 +22,7 @@ class virtual atom na sy nb =
 		  method to_string =
 			"" ^ _name ^ "(" ^ _symbol ^ ")#"
 			^ (string_of_int _atomic_number)
+		  method equals (that:atom) = _atomic_number = that#atomic_number
 		end
 
 class hydrogen = object inherit atom "hydrogen" "H" 1 end
