@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/25 14:29:07 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/25 16:20:03 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/25 16:33:53 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -56,6 +56,19 @@ object (self)
 	[(new Molecule.carbon_dioxyde, 1); (new Molecule.water, 1)]
 	  
   method private _get_balancing l =
+	let rec helper l ((nc, nh, no) as acc) =
+	  match l with
+	  | []					-> acc
+	  | (mol, n)::tl				->
+		 let formula = mol#formula in
+		 match formula with
+		 | "O2"		-> helper tl (nc			,nh					,no + n*2)
+		 | "CO2"	-> helper tl (nc + n*2		,nh					,no + n*2)
+		 | "H2O"	-> helper tl (nc			,nh + n*2			,no + n)
+		 | _		-> let n' = (mol :> alkane)#get_n in
+					   helper tl (nc + n*n'		,nh + n*n'*2 + 2	,no)
+	in
+	helper l (0, 0, 0)
 	
 	
 	(* method private _get_balancing l = *)
