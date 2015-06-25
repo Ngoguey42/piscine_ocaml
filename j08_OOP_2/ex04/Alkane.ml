@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/25 14:29:07 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/25 17:37:34 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/25 18:37:33 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -79,8 +79,8 @@ object (self)
 		 | "CO2"	-> helper tl (nc + n		,nh					,no + n*2)
 		 | "H2O"	-> helper tl (nc			,nh + n*2			,no + n)
 		 | _		-> let n' = parse_alkane_formula mol#formula in
-					   Printf.printf "Found %s: n=%d \n%!" formula n';
-					   helper tl (nc + n*n'		,nh + n*n'*2 + 2	,no)
+					   (* Printf.printf "[%s: n=%d]\n%!" formula n'; *)
+					   helper tl (nc + n*n'		,nh + n*n'*2 + 2*n	,no)
 	in
 	helper l (0, 0, 0)
 
@@ -105,13 +105,32 @@ object (self)
 	  failwith "is not balanced"
 			   
   method balance =
-	let (nc, nh, no) as lbal = self#_get_balancing _start in
-	let (nc', nh', no') as rbal = self#_get_balancing _result in
-	if lbal <> rbal then
+	(* BALANCE TREE WITH GIVEN DATAS *)
+	let balance_left fact ndiox =
+	  _start
+	in
+	let balance_right ncdiox nwater =
+	  _result
+	in
+	(* PPCM (Least common multiple) *)
+	let rec ppcm a b fa fb =
+	  let a' = a * fa in
+	  let b' = b * fb in
+	  if a' = b' then a'
+	  else if a' < b' then ppcm a b (fa + 1) fb
+	  else ppcm a b fa (fb + 1)
+	in
+	let (nc, nh, _) as lbal = self#_get_balancing _start in
+	let rbal = self#_get_balancing _result in
+	if lbal <> rbal && nc > 0 then
 	  begin
-		
-		{< >}
-		  (* self *)
+		let ncdiox = ppcm 4 nc 1 1 in
+		let fact = ncdiox / nc in
+		let nwater = nh * fact / 2 in
+		let ndiox = (nwater + ncdiox * 2) / 2 in
+		let newleft = balance_left fact ndiox in
+		let newright = balance_right ncdiox nwater in
+		{< _start = newleft; _result = newright >}
 	  end
 	else
 	  self
