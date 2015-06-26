@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/25 14:29:07 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/26 13:18:18 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/26 20:03:20 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -62,7 +62,7 @@ let get_balancing l =
 		| 'H'					-> nbracc
 		| 'C'					-> helper (i + 1) nbracc
 		| _						->
-		   (int_of_char c - int_of_char '0') + nbracc * 10
+		   helper (i + 1) ((int_of_char c - int_of_char '0') + nbracc * 10)
 	in
 	helper 0 0
   in
@@ -72,7 +72,7 @@ let get_balancing l =
 	| (mol, n)::tl	->
 	   let formula = mol#formula in
 	   match formula with
-	   | "O2"		-> helper tl (nc			,nh					,no + n*2)
+	   | "O2"	-> helper tl (nc			,nh					,no + n*2)
 	   | "CO2"	-> helper tl (nc + n		,nh					,no + n*2)
 	   | "H2O"	-> helper tl (nc			,nh + n*2			,no + n)
 	   | _		-> let n' = parse_alkane_formula mol#formula in

@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/25 14:29:07 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/26 19:35:07 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/26 20:03:47 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -62,7 +62,7 @@ let get_balancing l =
 		| 'H'					-> nbracc
 		| 'C'					-> helper (i + 1) nbracc
 		| _						->
-		   (int_of_char c - int_of_char '0') + nbracc * 10
+		   helper (i + 1) ((int_of_char c - int_of_char '0') + nbracc * 10)
 	in
 	helper 0 0
   in
