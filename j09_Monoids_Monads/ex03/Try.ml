@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/26 15:41:32 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/26 16:25:35 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/26 16:34:13 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -30,7 +30,7 @@ let recover (vt: 'a) (f: exn -> 'b t)  =
   | _							-> vt
 
 exception Salut
-								 
+			
 let filter vt f =
   match vt with
   | Success v when f v			-> vt
@@ -42,3 +42,13 @@ let flatten (vtt: 'a t t) =
   | Success (Success _ as vt)	-> vt
   | Success (Failure _ as vt)	-> vt
   | Failure _ as vt				-> vt
+
+let print_t_int vt =
+  print_string "\027[35m";
+  begin
+	match vt with
+	| Success i			-> print_string ("Success(" ^ string_of_int i ^ ")")
+	| Failure _			-> print_string "Failure(...)"
+  end;
+  print_endline "\027[0m"
+  
