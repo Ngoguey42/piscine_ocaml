@@ -6,11 +6,12 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/25 15:29:10 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/25 15:31:29 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/26 19:39:34 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
-class virtual reaction st re =
+class virtual reaction (st: (Molecule.molecule * int) list)
+					   (re: (Molecule.molecule * int) list) =
 		object
 		  method virtual balance: reaction
 		  method virtual get_start: (Molecule.molecule * int) list
