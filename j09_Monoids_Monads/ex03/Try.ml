@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/26 15:41:32 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/26 16:34:13 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/26 17:07:38 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -27,7 +27,7 @@ let recover (vt: 'a) (f: exn -> 'b t)  =
   (* V MUST BE A FAILURE (SUBJECT) *)
   match vt with
   | Failure e					-> f e
-  | _							-> vt
+  | _							-> failwith "V must be a failure"
 
 exception Salut
 			
