@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/25 14:29:07 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/26 19:12:43 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/26 19:35:07 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -204,13 +204,11 @@ object (self)
 			foreach_ndiox (ndiox - 1)
 						  ((ndiox, (new_right (ndiox * 2 - nwater) nc nwater))::acc)
 		in
-		foreach_ndiox (
-			nwater / 2 + nc * 2 - 1
-		  ) []
+		foreach_ndiox (nwater / 2 + nc) []
 	  end
 	else
 	  failwith "no alkane on left part"
-		  
+			   
   method to_string =
 	to_string_alkane_reac _start _result
 end
