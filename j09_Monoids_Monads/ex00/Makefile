@@ -6,7 +6,7 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/06/20 11:16:05 by jaguillo          #+#    #+#              #
-#    Updated: 2015/06/26 12:56:30 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/06/26 12:23:47 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ REPLACE_PATTERN := "s/[^[:space:]:]+/$(OBJS_DIR_E)&/g"
 FLAGS := -I $(OBJS_DIR)
 LIBS :=
 
-SRCS := Atom.ml Molecule.ml Reaction.ml Alkane.ml main.ml
+SRCS := Watchtower.ml
 
 BYT_OBJS := $(addprefix $(OBJS_DIR),$(SRCS:.ml=.cmo))
 OPT_OBJS := $(addprefix $(OBJS_DIR),$(SRCS:.ml=.cmx))
