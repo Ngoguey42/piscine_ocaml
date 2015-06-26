@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/26 14:20:48 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/26 14:29:00 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/26 15:17:51 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -21,14 +21,24 @@ module type MONOID =
 	val sub : element -> element -> element
   end
 
-module INT : MONOID =
+module INT : (MONOID with type element = int) =
   struct
 	type element = int
 	let zero1: element = 0
 	let zero2: element = 1
-	let mul (a: element) (b: element): element = a * b
-	let add (a: element) (b: element): element = a + b
-	let div (a: element) (b: element): element = a / b
-	let sub (a: element) (b: element): element = a - b
-					 
+	let mul a b: element = a * b
+	let add a b: element = a + b
+	let div a b: element = a / b
+	let sub a b: element = a - b
+  end
+
+module FLOAT : (MONOID with type element = float) =
+  struct
+	type element = float
+	let zero1: element = 0.
+	let zero2: element = 1.
+	let mul a b: element = a *. b
+	let add a b: element = a +. b
+	let div a b: element = a /. b
+	let sub a b: element = a -. b
   end
