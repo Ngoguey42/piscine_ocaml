@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/26 14:20:48 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/26 15:17:51 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/26 15:25:59 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -28,7 +28,11 @@ module INT : (MONOID with type element = int) =
 	let zero2: element = 1
 	let mul a b: element = a * b
 	let add a b: element = a + b
-	let div a b: element = a / b
+	let div a b: element =
+	  if b = 0 then
+		-1
+	  else
+		a / b
 	let sub a b: element = a - b
   end
 

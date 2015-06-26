@@ -6,7 +6,7 @@
 (*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        *)
 (*                                                +#+#+#+#+#+   +#+           *)
 (*   Created: 2015/06/26 14:20:24 by ngoguey           #+#    #+#             *)
-(*   Updated: 2015/06/26 15:16:06 by ngoguey          ###   ########.fr       *)
+(*   Updated: 2015/06/26 15:32:58 by ngoguey          ###   ########.fr       *)
 (*                                                                            *)
 (* ************************************************************************** *)
 
@@ -31,6 +31,7 @@ struct
   let div a b: M.element = M.div a b
 
   let power a p: M.element =
+	(* P MUST ALWAYS BE POSITIVE (subject) *)
 	let rec helper p acc =
 	  match p with
 	  | 0				-> acc
@@ -39,6 +40,7 @@ struct
 	helper p M.zero2
 
   let fact a: M.element =
+	(* A MUST BE POSITIVE *)
 	let rec helper v acc =
 	  if v > M.zero1 then
 		helper (M.sub v M.zero2) (mul acc v)
