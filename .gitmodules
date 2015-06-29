@@ -1,0 +1,6 @@
+[submodule "rush01"]
+	path = rush01
+	url = https://github.com/Ngoguey42/instant-tama
+[submodule "rush00"]
+	path = rush00
+	url = https://github.com/Ngoguey42/tic-tac-tic-tac-toe
